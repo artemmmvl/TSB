@@ -1,0 +1,64 @@
+543  [restartedMain] INFO  com.example.tsb.TsbApplication – Starting TsbApplication using Java 17.0.4.1 with PID 22653 (/Users/artemvolk/Desktop/TSB/build/classes/java/main started by artemvolk in /Users/artemvolk/Desktop/TSB)
+549  [restartedMain] INFO  com.example.tsb.TsbApplication – No active profile set, falling back to 1 default profile: "default"
+580  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor – Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+580  [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor – For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+1078 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate – Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+1176 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate – Finished Spring Data repository scanning in 94 ms. Found 5 JPA repository interfaces.
+1708 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer – Tomcat initialized with port(s): 807 (http)
+1719 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol – Initializing ProtocolHandler ["http-nio-807"]
+1719 [restartedMain] INFO  o.a.catalina.core.StandardService – Starting service [Tomcat]
+1720 [restartedMain] INFO  o.a.catalina.core.StandardEngine – Starting Servlet engine: [Apache Tomcat/10.1.8]
+1768 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] – Initializing Spring embedded WebApplicationContext
+1768 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext – Root WebApplicationContext: initialization completed in 1188 ms
+1938 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper – HHH000204: Processing PersistenceUnitInfo [name: default]
+1967 [restartedMain] INFO  org.hibernate.Version – HHH000412: Hibernate ORM core version 6.1.7.Final
+2261 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource – HikariPool-1 - Starting...
+2499 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool – HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1456745d
+2500 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource – HikariPool-1 - Start completed.
+2541 [restartedMain] INFO  SQL dialect – HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+3453 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator – HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+3458 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean – Initialized JPA EntityManagerFactory for persistence unit 'default'
+3873 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration – spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+3938 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping – Adding welcome page template: index
+4070 [restartedMain] INFO  o.s.s.w.DefaultSecurityFilterChain – Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@48327866, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@655e602b, org.springframework.security.web.context.SecurityContextHolderFilter@32ee311f, org.springframework.security.web.header.HeaderWriterFilter@5d4f1668, org.springframework.web.filter.CorsFilter@4d0b8ad, org.springframework.security.web.authentication.logout.LogoutFilter@4fabbfa3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5a3b1512, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20a973d1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@68900d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6dc3665d, org.springframework.security.web.access.ExceptionTranslationFilter@5e3511e8, org.springframework.security.web.access.intercept.AuthorizationFilter@3b51d5ef]
+4286 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer – LiveReload server is running on port 35729
+4295 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol – Starting ProtocolHandler ["http-nio-807"]
+4303 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer – Tomcat started on port(s): 807 (http) with context path ''
+4313 [restartedMain] INFO  com.example.tsb.TsbApplication – Started TsbApplication in 4.003 seconds (process running for 4.44)
+4483 [scheduling-1] INFO  c.e.tsb.services.AppointmentService – Удаление записи: Appointment{id=152, name='Artem Vlastyuk', email='cvlastyuk@mail.ru', service=Service{, name='Мужская стрижка', price=500}, phoneNumber='+79299287868', inst='artemvlastyuk', actual=true, permissionToSendEmail=true, emailSend=false, schedule=Schedule{id=202, date=2023-12-28T10:00, booked=false}, comment='', recordingTime=2023-12-27T14:04:38.821773}
+4518 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=202, date=2023-12-28T10:00, booked=true}
+4530 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=203, date=2023-12-28T11:00, booked=false}
+4541 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=204, date=2023-12-28T12:00, booked=false}
+4545 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=205, date=2023-12-28T13:00, booked=false}
+4550 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=206, date=2023-12-28T14:00, booked=false}
+4553 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=207, date=2023-12-28T15:00, booked=false}
+4557 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=208, date=2023-12-28T16:00, booked=false}
+4572 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=209, date=2023-12-28T17:00, booked=false}
+4575 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=210, date=2023-12-28T18:00, booked=false}
+4581 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=211, date=2023-12-29T12:00, booked=false}
+4585 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=212, date=2023-12-29T14:00, booked=false}
+4589 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=213, date=2023-12-29T16:00, booked=false}
+4593 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=214, date=2023-12-29T17:00, booked=false}
+4597 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=215, date=2023-12-29T20:00, booked=false}
+4602 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=216, date=2023-12-30T10:00, booked=false}
+4607 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=217, date=2023-12-30T11:00, booked=false}
+4612 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=218, date=2023-12-30T12:00, booked=false}
+4618 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=219, date=2023-12-30T14:00, booked=false}
+4622 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=220, date=2023-12-30T16:00, booked=false}
+4629 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=221, date=2023-12-30T17:00, booked=false}
+4633 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=222, date=2023-12-30T19:00, booked=false}
+4637 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=223, date=2023-12-30T20:00, booked=false}
+4641 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=224, date=2023-12-31T10:00, booked=false}
+4645 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=225, date=2023-12-31T12:00, booked=false}
+4650 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=226, date=2023-12-31T13:00, booked=false}
+4654 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=227, date=2023-12-31T14:00, booked=false}
+4658 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=228, date=2023-12-31T15:00, booked=false}
+4662 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=229, date=2023-12-31T17:00, booked=false}
+4667 [scheduling-1] INFO  c.e.tsb.services.ScheduleService – Удаление расписания: Schedule{id=230, date=2023-12-31T19:00, booked=false}
+26787 [http-nio-807-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] – Initializing Spring DispatcherServlet 'dispatcherServlet'
+26789 [http-nio-807-exec-1] INFO  o.s.web.servlet.DispatcherServlet – Initializing Servlet 'dispatcherServlet'
+26792 [http-nio-807-exec-1] INFO  o.s.web.servlet.DispatcherServlet – Completed initialization in 2 ms
+26833 [http-nio-807-exec-1] INFO  c.e.tsb.controllers.HomeController – Посещение главной страницы
+63681 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean – Closing JPA EntityManagerFactory for persistence unit 'default'
+63689 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource – HikariPool-1 - Shutdown initiated...
+63692 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource – HikariPool-1 - Shutdown completed.

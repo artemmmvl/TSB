@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Отзывы</title>
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/reviews.css">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="img-logo">
+            <a href="/">
+                <img src="/img/page/logotip3.png" alt="логотип">
+            </a>
+        </div>
+        <nav class="menu-header">
+            <ul>
+                <li>
+                    <a href="/services">УСЛУГИ</a>
+                </li>
+
+                <li>
+                    <a href="/reviews">ОТЗЫВЫ</a>
+                </li>
+                <li>
+                    <a href="/#contacts">КОНТАКТЫ</a>
+                </li>
+            </ul>
+        </nav>
+        <div th:if="${isAdmin}" class="profile-div">
+            <a class="profile-a" href="/admin">
+                <img src="/img/page/profil.png" height="60" width="60">
+            </a>
+        </div>
+        <div class="menu-burger">
+            <div class="before"></div>
+            <div class="center"></div>
+            <div class="after"></div>
+        </div>
+    </div>
+
+</header>
+<div class="open-form">
+    Добавить отзыв
+</div>
+<div class="container-for-form">
+    <form class="form-for-add-review" method="post" action="/reviews/new" enctype="multipart/form-data">
+        <h3>Добавить отзыв</h3>
+        <div class="div-input-text">
+            <label for="name">Имя</label>
+            <input type="text" required name="nameUser" th:value="${people} ? ${people.getFirstname()} : ''" id="name">
+        </div>
+        <div class="div-select">
+            <label for="serviceId">Услуга</label>
+            <div class="select-box">
+                <select id="serviceId" required name="serviceId">
+                    <option  value="-1" selected disabled>Выберите услугу</option>
+                    <tr th:each="cur:${services}">
+                        <option th:text="${cur.getName()}" th:value="${cur.getId()}"></option>
+                    </tr>
+                </select>
+                <p class="error-service"></p>
+            </div>
+        </div>
+        <div class="div-select">
+            <label for="stars">Оценка</label>
+            <div class="select-box">
+                <select id="stars" required name="stars">
+                    <option selected value="-1" disabled>Выберите оценку</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <p class="error-stars"></p>
+
+            </div>
+        </div>
+        <div class="div-input-text">
+            <label for="textReview">Отзыв</label>
+            <textarea  required name="textReview" id="textReview"></textarea>
+        </div>
+        <div class="div-input-file">
+            <label for="image">Фото</label>
+            <input multiple accept=".png, .jpeg, .jpg" type="file" name="images" id="image">
+        </div>
+<!--            <input type="hidden" th:value="${people} ? ${people.getUsername()} : null" name="people">-->
+        <input class="button-for-send-form" type="submit">
+    </form>
+    <div class="cancel">
+    </div>
+</div>
+<div class="container-for-reviews">
+    <div class="reviews">
+        <div class="review" th:each="cur:${reviews}">
+            <div class="top-part-div">
+                <div th:text="${cur.getName()}" class="name">
+                </div>
+                <div th:data-date="${cur.getDate().toLocalDate()}" class="date">
+                </div>
+            </div>
+            <div class="stars" th:data-size="${cur.getStars()}">
+            </div>
+            <div class="line">
+            </div>
+            <div  th:utext="${cur.getReviewText()}" class="text">
+            </div>
+            <div class="img">
+                <div class="left-arrow">
+                    <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+                </div>
+                <div class="imgs" th:data-size="${cur.getPathImages().size()}">
+                    <tr th:each="image:${cur.getPathImages()}">
+                        <img th:src="'/'+${image}">
+                    </tr>
+                </div>
+                <div class="right-arrow">
+                    <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+                </div>
+            </div>
+            <div th:if="${admin}" class="div-for-delete-service">
+                <form method="post" th:action="@{/reviews/delete/{id}(id=${cur.getId()})}">
+                    <button class="button-for-delete-service">Удалить</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<footer class="footer">
+    <address>
+        <div class="about-us-container">
+            <h2 class="h-about-us">О нас</h2>
+            <div class="line-h"></div>
+            <div class="text-about-us">
+                Мы такие-то такие-то
+            </div>
+        </div>
+        <div class="naviganion-container">
+            <h2 class="h-nav">Навигация</h2>
+            <div class="line-h"></div>
+            <div class="">
+                <ul class="ul-nav">
+                    <li>
+                        <a href="/services">Услуги</a>
+                    </li>
+
+                    <li>
+                        <a href="/reviews">Отзывы</a>
+                    </li>
+                    <li>
+                        <a href="/appointments/new">Запись</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cont-container">
+            <h2 class="h-cont">Контакты</h2>
+            <div class="line-h"></div>
+            <div class="cont">
+                <div class="cont-footer">
+                    <div>
+                        <a href="mailto: sviattsevat@gmail.com">
+                            <img src="/img/page/mail.jpeg" height="12">
+                            sviattsevat@gmail.com
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="/img/page/geo.png" height="12">
+                            г. Москва, проспект Вернадского 78
+                        </a>
+                    </div>
+                </div>
+                <div class="soc-net-footer">
+
+                    <div><a href="https://vk.com/artemvlastyuk"><img src="/img/page/vk1.0.png" height="30" width="30"></a>
+                    </div>
+                    <div><a href="https://instagram.com/artem.vlastyuk"><img src="/img/page/inst1.0.png" height="30" width="30"></a></div>
+                    <div><a href="https://t.me/artemvlastyuk"><img src="/img/page/tg1.0.png" height="30" width="30"></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </address>
+</footer>
+<script>
+    document.querySelector(".form-for-add-review").onsubmit=function (evt){
+        if(document.querySelector("#serviceId").selectedIndex==0){
+            evt.preventDefault()
+
+            document.querySelector(".error-service").innerHTML="Выберите услугу"
+            document.querySelector(".error-service").style.display="block"
+        }
+        if(document.querySelector("#stars").selectedIndex==0){
+            evt.preventDefault()
+            document.querySelector(".error-stars").innerHTML="Выберите оценку"
+            document.querySelector(".error-stars").style.display="block"
+        }
+
+   }
+    document.querySelector(".container-for-form").onmouseover=function (evt){
+        cancel=document.querySelector(".cancel")
+        if(evt.target===evt.currentTarget || evt.target===cancel){
+            cancel.style.opacity="1"
+            evt.currentTarget.style.cursor="pointer"
+        }
+        else {
+            cancel.style.opacity="0.7"
+            evt.currentTarget.style.cursor="default"
+        }
+    }
+    document.querySelector(".container-for-form").onclick=function (evt){
+        cancel=document.querySelector(".cancel")
+        if(evt.target===evt.currentTarget || evt.target===cancel){
+            evt.currentTarget.style.display="none"
+            document.body.style.overflow="scroll"
+
+        }
+
+   }
+   document.querySelector(".open-form").onclick=function (){
+        document.querySelector(".container-for-form").style.display="flex"
+       document.body.style.overflow="hidden"
+
+   }
+
+   arr=document.querySelectorAll(".review")
+   for (let i=0;i<arr.length;i++){
+       if(i%2===0){
+           arr[i].className="review-left"
+       }
+       else {
+           arr[i].className="review-right"
+       }
+   }
+    arrDivStars=document.querySelectorAll(".stars")
+    arrDivDate=document.querySelectorAll(".date")
+    let months=["января","февраля","марта","апреля","мая",
+        "июня","июля","августа","сентября","окрября","ноября","декабря"]
+    for (let i=0;i<arrDivStars.length;i++) {
+        numSize=arrDivStars[i].getAttribute('data-size')
+        date=arrDivDate[i].getAttribute("data-date")
+        let s=Number(date.toString().substring(8,10)) +" "+ months[Number(date.toString().substring(5,7))-1]
+        arrDivDate[i].innerHTML=s
+        for(let j=0; j<numSize;j++)
+        {
+            arrDivStars[i].innerHTML+="<svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 53.867 53.867\" style=\"enable-background:new 0 0 53.867 53.867;\" xml:space=\"preserve\">\n" +
+                "                    <polygon style=\"fill:#EFCE4A;\" points=\"26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 \"/>\n" +
+                "                </svg>"
+
+        }
+    }
+    leftArrow=document.querySelectorAll(".left-arrow")
+    rightArrow=document.querySelectorAll(".right-arrow")
+    imgs=document.querySelectorAll(".imgs")
+    let iPhoto=new Array(imgs.length)
+    let size=new Array(imgs.length)
+    for(let i=0;i<imgs.length;i++){
+        size[i]=imgs[i].getAttribute("data-size")
+        iPhoto[i]=0
+        if(size[i]==1){
+            rightArrow[i].style.display="none"
+        }
+        rightArrow[i].onclick=function (){
+            iPhoto[i]++;
+            console.log(iPhoto[i])
+
+            leftArrow[i].style.display="block"
+            if(iPhoto[i] == (size[i]-1)){
+                rightArrow[i].style.display="none"
+            }
+            imgs[i].style.left=(-100)*iPhoto[i]+'%'
+        }
+        leftArrow[i].onclick=function (){
+            iPhoto[i]--;
+            rightArrow[i].style.display="block"
+            if(iPhoto[i] === 0){
+                leftArrow[i].style.display="none"
+            }
+            imgs[i].style.left=(-100)*iPhoto[i]+'%'
+        }
+    }
+
+
+
+</script>
+<script src="/script/menu-header.js"></script>
+
+</body>
+</html>

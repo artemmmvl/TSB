@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вход</title>
+  <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+  <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+  <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+  <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+  <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+  <link rel="stylesheet" href="/css/registration.css">
+
+</head>
+<style>
+  .div-form{
+	margin-top: 25vh;
+  }
+  @media(max-width: 450px){
+
+  .div-form form>div p a {
+
+    font-size: 13px;
+  }
+}
+</style>
+<body>
+
+<div class="div-error">
+  <p th:text="${error}" class="error"></p>
+</div>
+<div class="container">
+  <div class="div-form">
+    <div class="reg-h-text">
+      <h2>Вход</h2>
+
+    </div>
+    <form action="/login" method="post">
+      <div>
+        <input class="name" id="name"  name="username" th:value="${username}" placeholder="email" type="email">
+      </div>
+
+      <div>
+        <input class="password_reg" name="password" th:value="${password}"  placeholder="Пароль" minlength="6" type="password">
+      </div>
+
+      <div>
+        <button class="reg_button" type="submit">Вход</button>
+      </div>
+      <div>
+        <p><a href="/registration">Нет аккаунта? <span>Зарегистрироваться</span></a></p>
+      </div>
+    </form>
+  </div>
+
+</div>
+<script>
+  if(document.querySelector(".div-error p").innerHTML==""){
+    document.querySelector(".div-error").style.display="none"
+  }
+  else{
+    setTimeout(()=>{document.querySelector(".div-error").style.display="none"}, 3000)
+  }
+</script>
+</body>
+</html>

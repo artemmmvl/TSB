@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Услуги</title>
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/services.css">
+
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="img-logo">
+            <a href="/">
+                <img src="img/page/logotip3.png" alt="логотип">
+            </a>
+        </div>
+        <nav class="menu-header">
+            <ul>
+                <li>
+                    <a href="/services">УСЛУГИ</a>
+                </li>
+
+                <li>
+                    <a href="/reviews">ОТЗЫВЫ</a>
+                </li>
+                <li>
+                    <a href="/#contacts">КОНТАКТЫ</a>
+                </li>
+            </ul>
+        </nav>
+        <div th:if="${isAdmin}" class="profile-div">
+            <a class="profile-a" href="/admin">
+                <img src="img/page/profil.png" height="60" width="60">
+            </a>
+        </div>
+        <div class="menu-burger">
+            <div class="before"></div>
+            <div class="center"></div>
+            <div class="after"></div>
+        </div>
+    </div>
+
+</header>
+
+<div class="services">
+    <div th:each="cur:${services}" class="service">
+        <a style="display: none" th:href="@{/services/{id}(id=${cur.getId()})}"></a>
+        <img th:src="${cur.getPathMainPhoto()}">
+        <div class="description-service">
+            <p class="name" th:text="${cur.getName()}"></p>
+            <div>
+                <p class="price" th:text="${cur.getPrice()} +' р'"></p>
+                <button><a th:href="@{/appointments/new(service=${cur.getId()})}">Записаться</a></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer class="footer">
+    <address>
+        <div class="about-us-container">
+            <h2 class="h-about-us">О нас</h2>
+            <div class="line-h"></div>
+            <div class="text-about-us">
+                Мы такие-то такие-то
+            </div>
+        </div>
+        <div class="naviganion-container">
+            <h2 class="h-nav">Навигация</h2>
+            <div class="line-h"></div>
+            <div class="">
+                <ul class="ul-nav">
+                    <li>
+                        <a href="/services">Услуги</a>
+                    </li>
+
+                    <li>
+                        <a href="/reviews">Отзывы</a>
+                    </li>
+                    <li>
+                        <a href="/appointments/new">Запись</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cont-container">
+            <h2 class="h-cont">Контакты</h2>
+            <div class="line-h"></div>
+            <div class="cont">
+                <div class="cont-footer">
+                    <div>
+                        <a href="mailto: sviattsevat@gmail.com">
+                            <img src="/img/page/mail.jpeg" height="12">
+                            sviattsevat@gmail.com
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="/img/page/geo.png" height="12">
+                            г. Москва, проспект Вернадского 78
+                        </a>
+                    </div>
+                </div>
+                <div class="soc-net-footer">
+
+                    <div><a href="https://vk.com/artemvlastyuk"><img src="/img/page/vk1.0.png" height="30" width="30"></a>
+                    </div>
+                    <div><a href="https://instagram.com/artem.vlastyuk"><img src="/img/page/inst1.0.png" height="30" width="30"></a></div>
+                    <div><a href="https://t.me/artemvlastyuk"><img src="/img/page/tg1.0.png" height="30" width="30"></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </address>
+</footer>
+<script src="/script/service.js"></script>
+<script src="/script/menu-header.js"></script>
+
+</body>
+</html>

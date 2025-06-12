@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Расписание</title>
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/add-appointment.css">
+    <link rel="stylesheet" href="/css/add-schedule.css">
+    <link rel="stylesheet" href="/css/schedules.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="img-logo">
+            <a href="/">
+                <img src="/img/page/logotip3.png" alt="логотип">
+            </a>
+        </div>
+        <nav class="menu-header">
+            <ul>
+                <li>
+                    <a href="/admin/schedule">РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/schedule/new">ДОБАВИТЬ РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/services/new">ДОБАВИТЬ УСЛУГУ</a>
+                </li>
+                <li>
+                    <a href="/admin/reviews/change">ОТЗЫВЫ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-burger">
+            <div class="before"></div>
+            <div class="center"></div>
+            <div class="after"></div>
+        </div>
+    </div>
+</header>
+
+<div class="container-all-schedules">
+    <div class="all-schedules">
+        <div class="schedule-in-day" >
+            <tr th:each="entry:${schedules!=null ? schedules.entrySet() : null}">
+                <div  class="date-appointment">
+                    <p th:text="${entry.getKey()}">10 авг</p>
+                </div>
+                <div  class="times-appointments">
+                    <th th:each="entryValue:${entry.getValue()}">
+                        <div  class="time" >
+                            <input type="checkbox" th:checked="${entryValue.isBooked()}" th:id="${entryValue.getDate()}" th:value="${entryValue.getId()}" name="schedule">
+                            <div class="time-block">
+                                <p th:text="${entryValue.getDate().toLocalTime()}">10:00</p>
+                            </div>
+                            <div th:if="!${entryValue.isBooked()}" class="form-for-delete-schedule">
+                                <form th:method="delete" th:action="@{/admin/schedule/delete/{id}(id=${entryValue.getId()})}">
+                                    <button></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div  th:if="${entryValue.isBooked()}" class="container-info-about-schedule">
+                            <div  class="info-about-schedule">
+                                <p class="header-text">Запись</p>
+                                <div class="line"></div>
+                                <div class="name-service">
+                                    <span>Имя:</span> <span th:text="${entryValue.getAppointment().getName()}" class="value"></span>
+                                </div>
+                                <div class="name-service">
+                                    <span>Услуга:</span> <span th:text="${entryValue.getAppointment().getService()!=null} ? ${entryValue.getAppointment().getService().getName()}" class="value"></span>
+                                </div>
+                                <div class="name-service">
+                                    <span>Номер:</span> <span th:text="${entryValue.getAppointment().getPhoneNumber()}" class="value"></span>
+                                </div>
+                                <div class="name-service">
+                                    <span>Inst:</span> <span th:text="${entryValue.getAppointment().getInst()}" class="value"></span>
+                                </div>
+                                <div class="name-service">
+                                    <span>Комментарий:</span>
+                                    <span th:text="${entryValue.getAppointment().getComment()}" class="value"></span>
+
+                                </div>
+                                <div class="buttons">
+                                    <form th:method="delete" th:action="@{/admin/appointments/delete/{id}(id=${entryValue.getAppointment().getId()})}">
+
+                                        <button class="delete-schedule">Удалить запись</button>
+                                    </form>
+                                    <form th:method="delete" th:action="@{/admin/schedule/delete/{id}(id=${entryValue.getId()})}">
+
+                                        <button class="delete-appointments">Удалить расписание</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </div>
+            </tr>
+        </div>
+    </div>
+</div>
+<script src="/script/menu-header.js"></script>
+
+<script>
+    let dates=document.querySelectorAll(".date-appointment")
+    var checkOpenDatesSchedules=new Array(dates.length);
+    console.log(checkOpenDatesSchedules)
+    for(let i=0;i<dates.length;i++){
+        dates[i].addEventListener("click",func.bind(null, i),this)
+
+    }
+    function func (i, event) {
+        block = event.currentTarget
+        console.log(checkOpenDatesSchedules[i])
+        if (!checkOpenDatesSchedules[i]) {
+            block.nextElementSibling.style.display = "flex"
+            block.style.backgroundColor = "whitesmoke"
+            // block.style.color = "white"
+            // block.style.fontWeight = "800"
+
+            checkOpenDatesSchedules[i] = true
+        } else {
+            block.nextElementSibling.style.display = "none"
+            block.style.backgroundColor = "white"
+            block.style.color = "black"
+            block.style.fontWeight = "400"
+
+            checkOpenDatesSchedules[i] = false
+        }
+    }
+
+    let timeBlocks=document.querySelectorAll(".time")
+    let arrTime=new Array(timeBlocks.length)
+    for(let i=0;i<timeBlocks.length;i++){
+        arrTime[i]=0
+        timeBlocks[i].onclick=function (){
+            if(this.querySelector("input").checked) {
+                if (!arrTime[i]) {
+                    this.nextElementSibling.style.display = "block"
+                } else {
+                    this.nextElementSibling.style.display = "none"
+
+                }
+                arrTime[i] = !arrTime[i]
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

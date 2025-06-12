@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Регистрация</title>
+  <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+  <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+  <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+  <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+  <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+  <link rel="stylesheet" href="/css/registration.css">
+
+</head>
+<body>
+
+<div class="container">
+  <div class="div-form">
+    <div class="reg-h-text">
+      <h2>Регистрация</h2>
+
+    </div>
+    <form action="/registration" method="post">
+      <div>
+        <input class="name" required id="name" th:value="${name}" name="firstname" placeholder="Имя" type="text">
+      </div>
+      <div>
+        <input class="lastname" required name="lastname" th:value="${lastname}" placeholder="Фамилия" type="text">
+      </div>
+      <div>
+        <input class="email_reg"   required name="email" th:value="${email}" placeholder="Электронная почта" type="email">
+        <p class="error-login" style="color: red; font-size: 12px;" th:text="${errorMessage}"></p>
+      </div>
+      <div>
+        <input class="phone" required name="phone" th:value="${phone}" placeholder="Номер телефона" type="tel">
+      </div>
+      <div>
+        <input class="password" name="password" th:value="${password}" required placeholder="Пароль" minlength="6" type="password">
+      </div>
+      <div>
+        <input class="password2" name="password2" th:value="${password}" required placeholder="Повторите пароль" minlength="6" type="password">
+        <p class="error"></p>
+      </div>
+      <div>
+        <button class="reg_button" type="submit">Зарегистрироваться</button>
+      </div>
+      <div>
+        <p><a href="/login">Уже есть аккаунт? <span>Войти</span></a></p>
+      </div>
+    </form>
+  </div>
+
+</div>
+<script>
+  document.querySelector("form").onsubmit=function(evt){
+    document.querySelector(".error").innerHTML=" ";
+    if(document.querySelector(".password").value!==document.querySelector(".password2").value){
+      setTimeout(()=>{document.querySelector(".error").innerHTML="Ошибка"}, 500)
+      document.querySelector(".error").style.color="red"
+      evt.preventDefault()
+    }
+  }
+  if(document.querySelector(".error-login").innerHTML==""){
+    document.querySelector(".error-login").style.display="none"
+  }
+</script>
+</body>
+</html>

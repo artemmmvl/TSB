@@ -1,0 +1,125 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Manrope', Arial, sans-serif;
+    padding-top: 120px;
+    padding-bottom: 50px;
+
+}
+.menu-header{
+    width: calc(100% - 170px);
+}
+.header-div{
+    width: 100%;
+    text-align: center;
+    height: 60px;
+    position: relative;
+    top:0;
+    display: block;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0.7px;
+    border-style: solid;
+    border-color: LightGrey;
+    margin-bottom: 30px;
+}
+.header-div p{
+    margin: 0;
+    padding-top: 20px;
+    font-size: 19px;
+    font-family: 'Manrope',Arial,sans-serif;
+}
+.div-input-text, .div-input-check,.div-input-file, .div-input-radio{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 13px;
+}
+.div-input-text textarea{
+    height: 100px;
+    resize: vertical;
+}
+.form-for-add-service input[type="text"],.form-for-add-service input[type="number"], textarea{
+
+    border-radius:0;
+    height: 46px;
+    font-size: 17px;
+    font-family: 'Manrope',Arial,sans-serif;
+    border-color: black;
+    border-style: solid;
+    border-width: 1.5px;
+
+    /*color: #282828;*/
+    /*opacity: 0.8;*/
+    font-weight: lighter;
+    padding-left: 10px;
+}
+.form-for-add-service{
+    width: 37%;
+}
+
+.container-for-form{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.div-input-text label, .div-input-file label{
+    font-size: 19px;
+    margin-bottom: 5px;
+    margin-left: 2px;
+}
+.div-input-check{
+    margin-top: 10px;
+}
+.div-input-radio>div{
+    margin-bottom: 2px;
+    margin-left: 4px;
+}
+.div-input-radio input{
+    height: 15px;
+    width: 15px;
+}
+
+.div-input-radio p{
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 19px;
+}
+
+.button-for-send-form{
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    color: white;
+    background-color: #141414;
+    border-style: none;
+    font-size: 19px;
+    font-weight: bolder;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+.button-for-send-form:hover{
+    /*background-color: black;*/
+
+    opacity: 1;
+    cursor: pointer;
+}
+@media(max-width: 1000px){
+    .form-for-add-service {
+        width: 50%;
+    }
+}
+@media (max-width: 650px){
+    .form-for-add-service {
+        width: 70%;
+    }
+     .menu-header {
+         width: 100%;
+     }
+ }
+ @media (max-width: 450px){
+     .form-for-add-service {
+         width: 80%;
+     }
+
+  }

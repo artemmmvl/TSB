@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Beauty Salon</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+</head>
+<body>
+<div class="div-error">
+    <p th:text="${error}" class="error"></p>
+</div>
+    <header class="header">
+        <div class="container">
+            <div class="img-logo">
+                <a href="/">
+                    <img src="/img/page/logotip3.png" alt="логотип">
+                </a>
+            </div>
+            <nav class="menu-header">
+                <ul>
+                    <li>
+                        <a href="/services">УСЛУГИ</a>
+                    </li>
+
+                    <li>
+                        <a href="/reviews">ОТЗЫВЫ</a>
+                    </li>
+                    <li>
+                        <a href="/#contacts">КОНТАКТЫ</a>
+                    </li>
+                </ul>
+            </nav>
+            <div th:if="${isAdmin}" class="profile-div">
+                <a class="profile-a" href="/admin">
+                    <img src="/img/page/profil.png" height="60" width="60">
+                </a>
+            </div>
+            <div class="menu-burger">
+                <div class="before"></div>
+                <div class="center"></div>
+                <div class="after"></div>
+            </div>
+        </div>
+    </header>
+    <div class="main-img">
+        <img src="/img/page/bs.jpeg" class="header_img" alt="a">
+        <div class="text">
+            <p>BEAUTY SALON</p>
+        </div>
+    </div>
+
+    <h2 class="text-service">УСЛУГИ</h2>
+    <div class="block-services">
+        <div class="left-arrow">
+            <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+        </div>
+        <div  class="services">
+            <div class="service" th:each="cur:${services}">
+                <a style="display: none" th:href="@{/services/{id}(id=${cur.getId()})}"></a>
+                <img th:src="${cur.getPathMainPhoto()}">
+                <div class="description-service">
+                    <p class="name" th:text="${cur.getName()}"></p>
+                    <div>
+                        <p class="price" th:text="${cur.getPrice()} +' р'"></p>
+                        <button><a th:href="@{/appointments/new(service=${cur.getId()})}">Записаться</a></button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="right-arrow">
+            <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+
+        </div>
+        <div class="all-service-button">
+            <button><a href="/services">Все услуги</a></button>
+        </div>
+    </div>
+
+    <div class="div-text-review">
+        <h2 class="text-review">ОТЗЫВЫ</h2>
+    </div>
+    <div class="block-reviews">
+        <div class="left-arrow">
+            <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+        </div>
+        <div class="reviews">
+            <div class="review" th:each="cur:${reviews}">
+                <div class="top-part-div">
+                    <div th:text="${cur.getName()}" class="name">
+                    </div>
+                    <div th:data-date="${cur.getDate().toLocalDate()}" class="date">
+                    </div>
+                </div>
+                <div class="stars" th:data-size="${cur.getStars()}">
+                </div>
+                <div class="line">
+                </div>
+                <div  th:utext="${cur.getReviewText()}" class="text">
+                </div>
+            </div>
+        </div>
+        <div class="right-arrow">
+            <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+
+        </div>
+        <div class="all-service-button">
+            <button><a href="/reviews">Все отзывы</a></button>
+        </div>
+
+    </div>
+    <h2 class="text-contact" id="contacts">КОНТАКТЫ</h2>
+    <div class="contacts-container">
+
+
+        <div class="contact">
+            <p class="p-soc-net">Соц.сети</p>
+            <div class="social-network">
+
+                <div class="inst">
+                    <a href="https://instagram.com/artem.vlastyuk">
+                        <img src="/img/page/inst.png">
+                    </a>
+                </div>
+                <div class="tg">
+                    <a href="https://t.me/artemvlastyuk">
+                        <img src="/img/page/tg6.png">
+                    </a>
+                </div>
+                <div class="vk">
+                    <a href="https://vk.com/artemvlastyuk">
+                        <img src="/img/page/vk1.png">
+                    </a>
+                </div>
+            </div>
+            <p class="p-email">E-mail</p>
+            <div class="email">
+
+                <a href="mailto: sviattsevat@gmail.com">cvlastyuk@mail.ru</a>
+            </div>
+            <p class="p-email">Адрес</p>
+
+            <div style="margin-bottom: 20px" class="address">
+                <a href="https://yandex.ru/maps/-/CDqq4R4o">
+                    г. Москва, проспект Вернадского 78
+                </a>
+            </div>
+        </div>
+        <div class="map">
+            <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a href="https://yandex.ru/maps/213/moscow/house/prospekt_vernadskogo_70a/Z04Ycg5lTUACQFtvfXp2cHthYw==/?ll=37.495455%2C55.671727&utm_medium=mapframe&utm_source=maps&z=16.88" style="color:#eee;font-size:12px;position:absolute;top:14px;">Проспект Вернадского, 70А — Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?ll=37.495455%2C55.671727&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjY2NDk2NxJJ0KDQvtGB0YHQuNGPLCDQnNC-0YHQutCy0LAsINC_0YDQvtGB0L_QtdC60YIg0JLQtdGA0L3QsNC00YHQutC-0LPQviwgNzDQkCIKDVn7FUIV2a9eQg%2C%2C&z=16.88" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+        </div>
+    </div>
+    <div class="feedback-container" id="feedback">
+        <div class="blure">
+            <form method="post" action="/feedback" class="form-feedback">
+                <h2>Обратная связь</h2>
+                <div>
+                    <input placeholder="Имя" id="name" type="text" name="name">
+                </div>
+                <div>
+                    <input required placeholder="Почта" id="email" type="email" name="email">
+                </div>
+                <div>
+                    <textarea required placeholder="Текст" id="text" name="text"></textarea>
+                </div>
+                <div>
+                    <button>Отправить</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <footer class="footer">
+        <address>
+            <div class="about-us-container">
+                <h2 class="h-about-us">О нас</h2>
+                <div class="line-h"></div>
+                <div class="text-about-us">
+                    Мы такие-то такие-то
+                </div>
+            </div>
+            <div class="naviganion-container">
+                <h2 class="h-nav">Навигация</h2>
+                <div class="line-h"></div>
+                <div class="">
+                    <ul class="ul-nav">
+                        <li>
+                            <a href="/services">Услуги</a>
+                        </li>
+
+                        <li>
+                            <a href="/reviews">Отзывы</a>
+                        </li>
+                        <li>
+                            <a href="/appointments/new">Запись</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cont-container">
+                <h2 class="h-cont">Контакты</h2>
+                <div class="line-h"></div>
+                <div class="cont">
+                    <div class="cont-footer">
+                        <div>
+                            <a href="mailto: sviattsevat@gmail.com">
+                                <img src="/img/page/mail.jpeg" height="12">
+                                sviattsevat@gmail.com
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <img src="/img/page/geo.png" height="12">
+                                г. Москва, проспект Вернадского 78
+                            </a>
+                        </div>
+                    </div>
+                    <div class="soc-net-footer">
+
+                        <div><a href="https://vk.com/artemvlastyuk"><img src="/img/page/vk1.0.png" height="30" width="30"></a>
+                        </div>
+                        <div><a href="https://instagram.com/artem.vlastyuk"><img src="/img/page/inst1.0.png" height="30" width="30"></a></div>
+                        <div><a href="https://t.me/artemvlastyuk"><img src="/img/page/tg1.0.png" height="30" width="30"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </address>
+
+    </footer>
+    <script src="/script/service.js"></script>
+    <script src="/script/menu-header.js"></script>
+    <script>
+    if(document.querySelector(".div-error p").innerHTML==""){
+        document.querySelector(".div-error").style.display="none"
+    }
+    else{
+        setTimeout(()=>{document.querySelector(".div-error").style.display="none"}, 3000)
+    }
+    let butts=document.querySelectorAll('.all-service-button button')
+    for(let i=0;i<butts.length;i++){
+        butts[i].onclick=function (){
+            window.location.href=this.querySelector('a').href
+        }
+
+    }
+    console.log(window.screen.width)
+    if(window.screen.width<700){
+        document.querySelector(".main-img img").src="/img/page/foto_tanya.JPG"
+    }
+
+    let leftArrow=document.querySelectorAll('.left-arrow')
+
+    let rightArrow=document.querySelectorAll('.right-arrow')
+    let arr=new Array(3)
+    let services=document.querySelectorAll(".services")[0].querySelectorAll(".service")
+    let education=document.querySelectorAll(".services")[1].querySelectorAll(".service")
+    let reviews=document.querySelectorAll(".reviews .review")
+    if(services.length==1){
+        rightArrow[0].style.display="none"
+    }
+    if(education.length==1){
+        rightArrow[1].style.display="none"
+    }
+    if(reviews.length==1){
+        rightArrow[2].style.display="none"
+    }
+
+    for(let i=0;i<leftArrow.length;i++){
+        arr[i]=0
+        rightArrow[i].onclick=function(){
+            leftArrow[i].style.display='block'
+            arr[i]++;
+            leftArrow[i].nextElementSibling.style.left=(-100)*arr[i]+"%"
+            if(i==0){
+                if(services.length-1==arr[i]){
+                    rightArrow[i].style.display="none"
+                }
+            }
+            else if(i==1){
+                if(education.length-1==arr[i]){
+                    rightArrow[i].style.display="none"
+                }
+            }
+            else{
+
+                if(reviews.length-1==arr[i]){
+
+                    rightArrow[i].style.display="none"
+                }
+            }
+
+        }
+        leftArrow[i].onclick=function(){
+            rightArrow[i].style.display='block'
+            arr[i]--;
+            leftArrow[i].nextElementSibling.style.left=(-100)*arr[i]+"%"
+            if(i==0){
+                if(0==arr[i]){
+                    leftArrow[i].style.display="none"
+                }
+            }
+            else if(i==1){
+                if(0==arr[i]){
+                    leftArrow[i].style.display="none"
+                }
+            }
+            else{
+                if(0==arr[i]){
+                    leftArrow[i].style.display="none"
+                }
+            }
+
+        }
+    }
+    arrDivStars=document.querySelectorAll(".stars")
+    arrDivDate=document.querySelectorAll(".date")
+    let months=["января","февраля","марта","апреля","мая",
+        "июня","июля","августа","сентября","окрября","ноября","декабря"]
+    for (let i=0;i<arrDivStars.length;i++) {
+        numSize=arrDivStars[i].getAttribute('data-size')
+        date=arrDivDate[i].getAttribute("data-date")
+        let s=Number(date.toString().substring(8,10)) +" "+ months[Number(date.toString().substring(5,7))-1]
+        arrDivDate[i].innerHTML=s
+        for(let j=0; j<numSize;j++)
+        {
+            arrDivStars[i].innerHTML+="<svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 53.867 53.867\" style=\"enable-background:new 0 0 53.867 53.867;\" xml:space=\"preserve\">\n" +
+                "                    <polygon style=\"fill:#EFCE4A;\" points=\"26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 \"/>\n" +
+                "                </svg>"
+
+        }
+    }
+
+    </script>
+</body>
+</html>

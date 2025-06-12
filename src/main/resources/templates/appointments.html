@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Записи</title>
+</head>
+<body>
+<div th:each="cur:${appointments}">
+    <p th:text="${cur.getSchedule()}"></p>
+</div>
+</body>
+</html>

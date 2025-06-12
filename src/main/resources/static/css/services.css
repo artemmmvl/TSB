@@ -1,0 +1,20 @@
+.services>div{
+    background-color: whitesmoke;
+    margin-top: 20px;
+
+}
+body{
+    display: flex;
+    padding: 0px;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+.services>div:hover{
+    cursor: pointer;
+}
+.services{
+    margin-top: 80px;
+    flex-wrap: wrap;
+
+}

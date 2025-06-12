@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>superadmin</title>
+</head>
+<body>
+  <table>
+    <tr>
+      <td>
+        id
+      </td>
+      <td>
+        active
+      </td>
+      <td>
+        email
+      </td>
+      <td>
+        firstname
+      </td>
+      <td>
+        lastname
+      </td>
+      <td>
+        password
+      </td>
+      <td>
+        PhoneNumber
+      </td>
+      <td>
+        Роли
+      </td>
+      <td>
+        Сохранение
+      </td>
+      <td>
+        Удаление
+      </td>
+    </tr>
+
+    <tr th:each="cur:${users}">
+        <form method="post" action="/superadmin/users/change">
+            <td>
+              <input type="number" name="id" readonly th:value="${cur.getId()}">
+            </td>
+            <td>
+              <input type="checkbox" name="active" th:checked="${cur.isActive()}">
+            </td>
+            <td>
+              <input type="text" name="email" th:value="${cur.getEmail()}">
+            </td>
+            <td>
+              <input type="text" name="firstname" th:value="${cur.getFirstname()}">
+            </td>
+            <td>
+              <input type="text" name="lastname" th:value="${cur.getLastname()}">
+            </td>
+            <td>
+              <input type="password" name="password">
+            </td>
+            <td>
+              <input type="text" name="phoneNumber" th:value="${cur.getPhoneNumber()}">
+            </td>
+            <td>
+              <input type="text" name="roles" th:value="${cur.getRoles()}">
+            </td>
+            <td>
+                <input type="submit" value="Сохранить">
+            </td>
+        </form>
+            <td>
+                <form method="post" action="/superadmin/users/delete">
+                    <input type="hidden" name="id" th:value="${cur.getId()}">
+                    <input type="submit" value="Удалить">
+                </form>
+
+            </td>
+    </tr>
+
+
+  </table>
+
+</body>
+</html>

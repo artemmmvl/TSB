@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Услуга</title>
+  <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+  <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+  <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+  <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+  <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+  <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+  <meta name="description" th:content="${service.getName()}+' '+${service.getDescription()}">
+
+  <link rel="stylesheet" href="/css/service.css">
+
+</head>
+<body>
+<div class="header-div">
+  <div class="name"><p th:text="${service.getName()}">Базовый курс</p></div>
+  <div class="close"><div></div></div>
+</div>
+<div class="service">
+  <div class="gallery-images">
+    <div class="container-main-img">
+      <div class="left-arrow">
+        <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+      </div>
+      <div class="main-img">
+        <img th:src="'/'+${service.getPathMainPhoto()}" alt="">
+      </div>
+      <div class="right-arrow">
+        <svg  focusable="false" style="display: block" viewBox="0 0 7.3 13" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polyline fill="none" stroke="#171717" stroke-linecap="butt" stroke-width="1" points="0.5,0.5 6.5,6.5 0.5,12.5"></polyline></svg>
+
+      </div>
+
+    </div>
+    <div class="all-images" >
+      <div class="img" th:each="cur:${service.getPathPhotos()}">
+        <img th:src="'/'+${cur}" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="info-about-service">
+    <div th:text="${service.getName()}" class="name">
+    </div>
+    <div th:text="${service.getPrice}+' р'" class="price">
+    </div>
+    <div th:utext="${service.getDescription()}" class="description">
+
+    </div>
+    <div class="button-for-appointment">
+      <a th:href="@{/appointments/new(service=${service.getId()})}">
+        Записаться
+      </a>
+    </div>
+    <div th:if="${admin}" class="div-for-delete-and-change-service">
+      <form method="post" th:action="@{/services/delete/{id}(id=${service.getId()})}">
+          <button class="button-for-delete-service">Удалить</button>
+      </form>
+        <div class="button-for-change-service">
+          <a th:href="@{/admin/services/new(id=${service.getId()})}">Изменить</a>
+        </div>
+  </div>
+</div>
+</div>
+<script>
+  let block_imgs=document.querySelectorAll(".all-images .img")
+  console.log(block_imgs)
+  let rightArrow=document.querySelector(".right-arrow")
+  let leftArrow=document.querySelector(".left-arrow")
+  let indexFoto=0
+  rightArrow.addEventListener("click",function () {
+    block_imgs[indexFoto].style.borderStyle="none"
+    indexFoto++;
+
+    if(indexFoto===block_imgs.length){
+      indexFoto=0
+    }
+    block_imgs[indexFoto].style.borderStyle="solid"
+
+    document.querySelector(".main-img img").src=block_imgs[indexFoto].querySelector("img").src
+  })
+  leftArrow.addEventListener("click",function () {
+    block_imgs[indexFoto].style.borderStyle="none"
+
+    indexFoto--;
+    if(indexFoto<0){
+      indexFoto=block_imgs.length+indexFoto
+    }
+    block_imgs[indexFoto].style.borderStyle="solid"
+
+    document.querySelector(".main-img img").src=block_imgs[indexFoto].querySelector("img").src
+  })
+  for(let i=0;i<block_imgs.length;i++){
+    block_imgs[i].onclick=function () {
+      block_imgs[indexFoto].style.borderStyle="none"
+
+      indexFoto=i
+      block_imgs[indexFoto].style.borderStyle="solid"
+
+      document.querySelector(".main-img img").src=this.querySelector("img").src
+    }
+  }
+  document.querySelector(".button-for-appointment").onclick=function (){
+    window.location.href=this.querySelector("a").href
+  }
+  buttonChange=document.querySelector(".button-for-change-service");
+  if(buttonChange!=null){
+    buttonChange.onclick=function(){
+        window.location.href=this.querySelector("a").href
+    }
+  }
+  document.querySelector(".close").onclick=function(){
+    history.back()
+  }
+
+</script>
+</body>
+</html>

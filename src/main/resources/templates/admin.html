@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>SVIATTSEVA BROWS</title>
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="img-logo">
+            <a href="/">
+                <img src="/img/page/logotip3.png" alt="логотип">
+            </a>
+        </div>
+        <nav class="menu-header">
+            <ul>
+                <li>
+                    <a href="/admin/schedule">РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/schedule/new">ДОБАВИТЬ РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/services/new">ДОБАВИТЬ УСЛУГУ</a>
+                </li>
+                <li>
+                    <a href="/admin/reviews/change">ОТЗЫВЫ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-burger">
+            <div class="before"></div>
+            <div class="center"></div>
+            <div class="after"></div>
+        </div>
+    </div>
+</header>
+<div class="container-for-profile">
+    <div class="info-about-people">
+        <div class="text-info">
+            <h2>Информация о пользователе</h2>
+            <form method="post" action="/admin/change">
+                <div class="name">
+                    <label for="name">Имя</label>
+                    <input type="text" name="firstname" id="name" th:value="${people.getFirstname()}">
+                </div>
+                <div class="lastname">
+                    <label for="lastname">Фамилия</label>
+                    <input type="text" name="lastname" id="lastname" th:value="${people.getLastname()}">
+                </div>
+                <div class="phone">
+                    <label for="phone">Номер телефона</label>
+                    <input type="text" name="phone" id="phone" th:value="${people.getPhoneNumber()}">
+                </div>
+                <div class="email">
+                    <label for="email">Почта</label>
+                    <input type="email" name="email" id="email" th:value="${people.getEmail()}">
+                    <p class="error-login" style="color:red;" th:text="${error}"></p>
+                </div>
+                <button>Сохранить</button>
+            </form>
+
+            </form>
+        </div>
+
+
+    </div>
+    <div class="change-password" id="change-password">
+        <div class="text-info">
+        <h2>Изменение пароля</h2>
+        <form method="post" action="/admin/change/password">
+            <div class="password_old">
+                <label for="password_old">Введите свой пароль</label>
+                <input type="password" name="passwordOld" id="password_old" th:value="${passwordOld}">
+                <p class="error-password-old" style="color:red;" th:text="${errorPasswordOld}"></p>
+            </div>
+            <div class="password_old">
+                <label for="password_new">Новый пароль</label>
+                <input class="password-new" type="password" th:value="${PasswordNew}" name="passwordNew" id="password_new">
+            </div>
+            <div class="password_old">
+                <label for="password_new2">Повторите новый пароль</label>
+                <input class="password-new2" type="password" th:value="${PasswordNew2}"  name="passwordNew2" id="password_new2" >
+                <p class="error-password-new" style="color:red;" th:text="${errorPasswordNew}"></p>
+            </div>
+
+            <button>Сохранить</button>
+        </form>
+        </div>
+    </div>
+    <div class="logout">
+        <a href="/logout">ВЫХОД</a>
+    </div>
+</div>
+<script src="/script/menu-header.js"></script>
+<script>
+    if(document.querySelector(".error-login").innerHTML==""){
+        document.querySelector(".error-login").style.display="none"
+    }
+    document.querySelector(".change-password form").onsubmit=function(evt){
+        document.querySelector(".error-password-new").innerHTML=" ";
+        if(document.querySelector(".password-new").value!==document.querySelector(".password-new2").value){
+            setTimeout(()=>{document.querySelector(".error-password-new").innerHTML="Пароли не совпадают"}, 500)
+            document.querySelector(".error-password-new").style.color="red"
+            document.querySelector(".error-password-new").style.display="block"
+            evt.preventDefault()
+        }
+    }
+    if(document.querySelector(".error-password-old").innerHTML==""){
+        document.querySelector(".error-password-old").style.display="none"
+    }
+    else{
+        window.location.href='#change-password'
+    }
+    document.querySelector(".logout").onclick=function(){
+        window.location.href=document.querySelector(".logout a").href
+    }
+
+</script>
+</body>
+</html>

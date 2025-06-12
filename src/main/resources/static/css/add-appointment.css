@@ -1,0 +1,591 @@
+body{
+    margin: 0;
+    padding: 0;
+    padding-bottom: 40px;
+}
+
+.form-for-add-appointment{
+    display: flex;
+    width: 100%;
+    /*flex-direction: row-reverse;*/
+    justify-content: flex-start;
+    margin-left: 0;
+
+}
+.form-for-add-appointment fieldset{
+    border: none;
+}
+.info-about-client>.input-text{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+fieldset{
+    width: 40%;
+    margin-left: 5%;
+}
+fieldset label{
+    font-size: 17px;
+    margin-bottom: 5px;
+    font-family: 'Manrope',Arial,sans-serif;
+    /*color: #282828;*/
+    /*opacity: 0.8;*/
+}
+.info-about-client input, .info-about-client textarea{
+    height: 46px;
+    font-size: 17px;
+    font-family: 'Manrope',Arial,sans-serif;
+    border-color: black;
+    border-style: solid;
+    border-width: 1.4px;
+
+    /*color: #282828;*/
+    /*opacity: 0.8;*/
+    font-weight: lighter;
+    padding-left: 10px;
+}
+.info-about-client textarea{
+    height: 80px;
+    resize: vertical;
+}
+.header-div{
+    width: 100%;
+    text-align: center;
+    height: 60px;
+    position: relative;
+    top:0;
+    display: flex;
+    justify-content: space-between;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0.7px;
+    border-style: solid;
+    border-color: LightGrey;
+    margin-bottom: 30px;
+
+}
+.header-div .name{
+    position: relative;
+    left: 20px;
+    top: 20px;
+    width: calc(100% - 80px);
+
+
+}
+.header-div .name p{
+    font-size: 20px;
+    margin: 0;
+}
+.close{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: 15px;
+    right: 35px;
+}
+.close div{
+    position: absolute;
+
+    width: 40px;
+    height: 3.5px;
+    background-color: black;
+    opacity: 0.8;
+    transform: rotate(45deg);
+    transform-origin: left;
+}
+.close:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+.close div::before{
+    content: " ";
+    position: absolute;
+    top: 20px;
+
+    width: 40px;
+    height: 3.5px;
+    background-color: black;
+
+    transform: rotate(-90deg);
+    transform-origin: left;
+}
+
+.info-about-service{
+    display: flex;
+    height: 80px;
+    width: 80%;
+    background-color: whitesmoke;
+    border-radius: 60px;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.about-service p{
+    margin: 0;
+}
+.img-service-div{
+    height: 80px;
+    width: 70px;
+    border-radius: 20%;
+    overflow: hidden;
+}
+.img-service-div img{
+    width: 100%;
+    height: 100%;
+}
+.text-about-service{
+    padding: 5px;
+    margin-left: 15px;
+    width: calc(80% - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.text-about-service div{
+    font-size: 16px;
+    font-family: 'Manrope', Arial, sans-serif;
+}
+.text-about-service .name{
+    font-weight: 450;
+}
+.text-about-service .price{
+    font-size: 18px;
+    font-weight: 100;
+}
+.change-service, .select-service{
+    height: 100%;
+    width: 20%;
+}
+.change-service img, .select-service img{
+    margin-top: 30px;
+    margin-left: calc(50% - 10px);
+    height: 20px;
+    width: 20px;
+}
+.change-service img:hover, .select-service:hover{
+    cursor: pointer;
+
+}
+.all-schedules>div{
+    display: flex;
+    flex-wrap: wrap;
+}
+.all-schedules details{
+    width: 30%;
+}
+
+
+
+.button-for-send-form{
+    margin-top: 40px;
+    width: 100%;
+    height: 50px;
+    color: white;
+    background-color: #141414;
+    border-style: none;
+    font-size: 19px;
+    font-weight: bolder;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.button-for-send-form:hover{
+    /*background-color: black;*/
+
+    opacity: 1;
+    cursor: pointer;
+}
+.send-email{
+    display: flex;
+}
+.send-email input[type=checkbox]{
+    height: 16px;
+    width: 16px;
+    border-radius: 0;
+}
+.send-email div{
+    margin-left: 5px;
+    font-size: 18px;
+    font-family: 'Manrope', Arial, sans-serif;
+}
+.radio-service{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+
+}
+.select-service{
+    display: none;
+}
+
+
+
+
+
+.button-select-schedules{
+    margin-top: 30px;
+    display: flex;
+    height: 80px;
+    width: 80%;
+    background-color: whitesmoke;
+    border-radius: 60px;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+
+}
+.button-select-schedules:hover{
+    cursor: pointer;
+}
+.button-select-schedules img{
+    height: 55px;
+    width: 55px;
+    margin-top: 12.5px;
+}
+.button-select-schedules div{
+    text-align: center;
+    width: calc(100% - 55px);
+    /*margin-left: 30px;*/
+    /*margin-top: 30px;*/
+    font-size: 22px;
+    font-family: 'Manrope', Arial, sans-serif;
+    vertical-align: middle;
+}
+.button-select-schedules p{
+    margin: 0;
+    margin-left: -15%;
+    margin-top: 29px;
+
+}
+.all-schedules{
+    margin-left: 25px;
+    margin-top: 20px;
+    width: 80%;
+    display: none;
+}
+.schedule-in-day{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.date-appointment p{
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+.date-appointment{
+    display: flex;
+    align-items: center;
+    width: 22.5%;
+    margin-left: 2%;
+    height: 50px;
+    margin-bottom: 10px;
+    background-color: white;
+    /*padding-top: 10px;*/
+    font-size: 21px;
+    font-family:  serif;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: Lightgrey;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+.date-appointment:hover{
+    cursor: pointer;
+}
+.times-appointments{
+    display: none;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+
+}.time{
+     margin-top: 10px;
+     height: 40px;
+     position: relative;
+     width: 17.5%;
+     margin-left: 2%;
+ }
+.time input{
+    height: 0;
+    overflow: hidden;
+}
+.time-block:hover{
+    cursor: pointer;
+}
+
+.send-email div{
+    width: calc(100% - 20px);
+}
+
+
+.time-block{
+    position: absolute;
+    top:0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-left: 2%;
+    height: 100%;
+    margin-bottom: 10px;
+    background-color: Lavender;
+    /*padding-top: 10px;*/
+    font-size: 17px;
+    font-family:  serif;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: Lightgrey;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+.time-block p{
+    text-align: center;
+    margin: 0;
+    width: 100%;
+
+}
+.time input[type=radio]:checked+div{
+    /*height: 100px;*/
+    /*background-color: #3CB371;*/
+    background-color: lightcoral;
+    /*opacity: 0.65;*/
+    /*font-weight: bolder;*/
+    color: black;
+    /*color: white;*/
+}
+
+.button-for-send-service-and-date{
+    display: none;
+    align-items: center;
+    margin-top: 40px;
+    width: calc(80% + 50px);
+    height: 50px;
+    color: white;
+    background-color: #141414;
+    border-style: none;
+    font-size: 19px;
+    font-weight: bolder;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+.button-for-send-service-and-date p{
+    width: 100%;
+    margin:0;
+    text-align: center;
+    font-weight: bolder;
+    font-family: 'Manrope', Arial, sans-serif;
+}
+.button-for-send-service-and-date:hover{
+    /*background-color: black;*/
+
+    opacity: 1;
+    cursor: pointer;
+}
+.div-error{
+	background-color: #ef4b4b;
+	display: inline-block;
+	padding: 40px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	position: fixed;
+	top: 20px;
+	left: -100%;
+	border-radius: 10px;
+	overflow: hidden;
+	animation: 0.8s normal 0s forwards 1 toright linear,
+	 0.8s normal 2.35s forwards 1 toleft linear;
+}
+
+.div-error::after{
+	position: absolute;
+	content: " ";
+	width: 100%;
+	height: 4px;
+	background-color: white;
+	left: 0;
+	bottom: 4px;
+	animation-duration: 1.7s;
+  	animation-name: progresbar;
+  	animation-delay: 0.8s;
+  	animation-fill-mode: forwards;
+  	animation-timing-function: linear;
+  	z-index: 10;
+}
+
+
+@keyframes progresbar{
+
+	to {
+    	width: 0;
+  	}
+
+}
+@keyframes toright{
+    70%{
+    		left: 20px;
+    }
+	to {
+    	left: 10px;
+  	}
+
+}
+@keyframes toleft{
+    30%{
+        left: 20px;
+    }
+	to {
+    	left: -100%;
+  	}
+
+}
+
+.div-error p{
+	color: white;
+	font-family: sans-serif;
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+
+}
+
+.info-about-client{
+    display: none;
+}
+@media(max-width: 1050px){
+    .text-about-service div{
+        font-size: 15px;
+    }
+    .button-for-send-service-and-date{
+        width: 95%;
+        margin-left: 2.5%;
+        margin-top: 20px;
+        background-color: #141414;
+        opacity: 1;
+    }
+    .info-about-service, .button-for-select-schedules{
+            width: calc(100% - 60px);
+    }
+    .button-for-send-form{
+        background-color: #141414;
+        opacity: 1;
+    }
+
+
+}
+@media (max-width: 950px) {
+    .form-for-add-appointment{
+        display: block;
+        width: 100%;
+    }
+    fieldset{
+        width: 70%;
+        margin-left: 15%;
+    }
+    .info-about-service{
+        width: calc(100% - 60px);
+    }
+    .button-select-schedules{
+        width: calc(100% - 60px);
+    }
+    .close{
+        right: 15px;
+    }
+}
+@media(max-width: 570px){
+    fieldset{
+        width: 95%;
+        margin-left:2.5%;
+        padding:0;
+    }
+    .text-about-service div{
+        font-size: 16px;
+    }
+    .text-about-service .price{
+        font-size:16px;
+    }
+    .text-about-service{
+        margin-left:5px;
+    }
+    .change-service, .select-service{
+        width:30px;
+    }
+    .change-service img, .select-service img {
+        margin-left:10px;
+    }
+    .all-schedules{
+        width: calc(100% - 50px);
+    }
+    .date-appointment{
+        width:30%;
+    }
+    .time{
+        width: 30%;
+    }
+    .button-for-send-service-and-date{
+
+        width: 95%;
+        margin-left: 2.5%;
+        margin-top: 20px;
+    }
+    .info-about-client{
+        margin-top: 40px;
+
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .button-select-schedules p {
+        margin-left: -10px;
+         font-size: 19px;
+    }
+    .div-error{
+                 width: 70%;
+      }
+       .div-error p{
+                  font-size: 16px;
+          }
+          .div-error{
+              padding: 20px;
+          }
+}
+@media (max-width: 400px){
+     .text-about-service div{
+        font-size: 14px;
+     }
+
+}
+@media(max-width: 350px){
+     .button-select-schedules p {
+            font-size: 18px;
+     }
+     .text-about-service div{
+         font-size: 12px;
+      }
+
+
+}
+

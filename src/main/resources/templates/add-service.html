@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Добавление услуги</title>
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+    <link rel="stylesheet" href="/css/index.css">
+
+    <link rel="stylesheet" href="/css/add-service.css">
+
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="img-logo">
+            <a href="/">
+                <img src="/img/page/logotip3.png" alt="логотип">
+            </a>
+        </div>
+        <nav class="menu-header">
+            <ul>
+                <li>
+                    <a href="/admin/schedule">РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/schedule/new">ДОБАВИТЬ РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/services/new">ДОБАВИТЬ УСЛУГУ</a>
+                </li>
+                <li>
+                    <a href="/admin/reviews/change">ОТЗЫВЫ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-burger">
+            <div class="before"></div>
+            <div class="center"></div>
+            <div class="after"></div>
+        </div>
+    </div>
+</header>
+<div class="container-for-form">
+    <form class="form-for-add-service" action="/admin/services/new" method="post" enctype="multipart/form-data">
+        <div class="div-input-text">
+            <label  for="name" >Название</label>
+            <input required type="text" placeholder="Название услуги" th:value="${service} ? ${service.getName()}" name="name" id="name">
+        </div>
+        <div class="div-input-text">
+            <label for="price">Цена</label>
+            <input type="number" required pattern="[0-9]+" th:value="${service} ? ${service.getPrice()}"  placeholder="Цена услуги (без букв)" name="price" id="price">
+        </div>
+        <div class="div-input-text">
+            <label for="description">Описание</label>
+            <textarea placeholder="Описание услуги" th:text="${service} ? ${service.getDescription()}" name="description" id="description"></textarea>
+        </div>
+        <div class="div-input-file">
+            <label for="file">Фото:</label>
+            <input accept=".png, .jpeg, .jpg" th:required="${service} ? false: true" type="file" multiple max="3" name="file" id="file">
+        </div>
+
+        <div class="div-input-check" th:if="${service==null}">
+            <div>
+                <input type="checkbox" checked name="saveSchedule" id="saveSchedule">
+                <label for="saveSchedule">Перенести расписание</label>
+            </div>
+
+        </div>
+        <input type="hidden" th:if="${service}" name="id" th:value="${service} ? ${service.getId()}">
+
+        <button class="button-for-send-form">Добавить</button>
+    </form>
+</div>
+<script src="/script/menu-header.js"></script>
+
+</body>
+</html>

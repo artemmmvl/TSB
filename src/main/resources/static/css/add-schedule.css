@@ -1,0 +1,472 @@
+body{
+    margin: 0;
+    padding: 0;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+.menu-header {
+    width: calc(100% - 170px);
+}
+.form-for-add-schedule{
+    display: flex;
+    width: 100%;
+    /*flex-direction: row-reverse;*/
+    justify-content: flex-start;
+    margin-left: 0;
+}
+.form-for-add-schedule fieldset{
+    border: none;
+}
+
+fieldset{
+    width: 40%;
+    margin-left: 5%;
+}
+
+.header-div{
+    width: 100%;
+    text-align: center;
+    height: 60px;
+    position: relative;
+    top:0;
+    display: flex;
+    justify-content: space-between;
+
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0.7px;
+    border-style: solid;
+    border-color: LightGrey;
+    margin-bottom: 30px;
+}
+.header-div .name{
+    position: relative;
+    left: 20px;
+    top: 20px;
+    width: calc(100% - 80px);
+
+
+}
+.header-div .name p{
+    font-size: 20px;
+    margin: 0;
+}
+.close{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: 15px;
+    right: 35px;
+}
+.close div{
+    position: absolute;
+
+    width: 40px;
+    height: 4px;
+    background-color: black;
+    opacity: 0.8;
+    transform: rotate(45deg);
+    transform-origin: left;
+}
+.close:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+.close div::before{
+    content: " ";
+    position: absolute;
+    top: 20px;
+
+    width: 40px;
+    height: 4px;
+    background-color: black;
+
+    transform: rotate(-90deg);
+    transform-origin: left;
+}
+.info-about-service{
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+
+    display: flex;
+    height: 80px;
+    width: calc(100% - 50px);
+    background-color: whitesmoke;
+    border-radius: 60px;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.about-service p{
+    margin: 0;
+}
+.img-service-div{
+    height: 80px;
+    width: 70px;
+    border-radius: 20%;
+    overflow: hidden;
+}
+.img-service-div img{
+    width: 100%;
+    height: 100%;
+}
+.text-about-service{
+    padding: 5px;
+    margin-left: 15px;
+    width: calc(80% - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.text-about-service div{
+    font-size: 20px;
+    font-family: 'Manrope', Arial, sans-serif;
+}
+.text-about-service .name{
+    font-weight: 450;
+}
+.text-about-service .price{
+    font-size: 18px;
+    font-weight: 100;
+}
+.delete-service, .select-service{
+    height: 100%;
+    width: 30px;
+}
+.delete-service img, .select-service img{
+    margin-top: 30px;
+    margin-left: calc(50% - 10px);
+    height: 20px;
+    width: 20px;
+}
+.delete-service img:hover, .select-service:hover{
+    cursor: pointer;
+}
+.all-schedules>div{
+    display: flex;
+    flex-wrap: wrap;
+}
+.all-schedules details{
+    width: 30%;
+}
+
+.checkbox-service{
+    height: 0;
+    overflow: hidden;
+}
+.delete-service{
+    display: none;
+}
+
+.services-fieldset input[type=checkbox]:checked+.info-about-service{
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    box-shadow: none;
+
+}
+
+
+
+.button-select-schedules{
+    margin-top: 30px;
+    display: flex;
+    height: 80px;
+    width: calc(100% - 50px);
+    background-color: whitesmoke;
+    border-radius: 60px;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+
+}
+.button-select-schedules:hover{
+    cursor: pointer;
+}
+.button-select-schedules img{
+    height: 55px;
+    width: 55px;
+    margin-top: 12.5px;
+}
+.button-select-schedules div{
+    text-align: center;
+    width: calc(100% - 55px);
+    /*margin-left: 30px;*/
+    /*margin-top: 30px;*/
+    font-size: 22px;
+    font-family: 'Manrope', Arial, sans-serif;
+    vertical-align: middle;
+}
+.button-select-schedules p{
+    margin: 0;
+    margin-left: -15%;
+    margin-top: 29px;
+
+}
+.all-schedules{
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    width: calc(100% - 20px);
+    display: none;
+}
+.schedule-in-day{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.date p{
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+.date{
+    display: flex;
+    align-items: center;
+    width: 22.5%;
+    margin-left: 2%;
+    height: 50px;
+    margin-bottom: 10px;
+    background-color: white;
+    /*padding-top: 10px;*/
+    font-size: 21px;
+    font-family:  serif;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: Lightgrey;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+.date:hover{
+    cursor: pointer;
+}
+.times{
+    display: none;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+.time{
+     margin-top: 10px;
+     height: 40px;
+     position: relative;
+     width: 17.5%;
+     margin-left: 2%;
+ }
+.times input{
+    height: 0;
+    overflow: hidden;
+}
+.time-block:hover{
+    cursor: pointer;
+}
+
+
+
+
+.time-block{
+    position: absolute;
+    top:0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-left: 2%;
+    height: 100%;
+    margin-bottom: 10px;
+    background-color: Lavender;
+    /*padding-top: 10px;*/
+    font-size: 17px;
+    font-family:  serif;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: Lightgrey;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+.time-block p{
+    text-align: center;
+    margin: 0;
+    width: 100%;
+
+}
+.time input[type=checkbox]:checked+div{
+    /*height: 100px;*/
+    /*background-color: #3CB371;*/
+    background-color: lightcoral;
+    /*opacity: 0.65;*/
+    /*font-weight: bolder;*/
+    color: black;
+    /*color: white;*/
+}
+
+.button-for-send-service-and-date{
+    margin-top: 50px;
+    width: 100%;
+    height: 50px;
+    display: none;
+    color: white;
+    background-color: #141414;
+    border-style: none;
+    font-size: 19px;
+    font-weight: bolder;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.button-for-send-service-and-date:hover{
+    /*background-color: black;*/
+
+    opacity: 1;
+    cursor: pointer;
+}
+.info-about-service:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 650px){
+    .menu-header {
+        width: 100%;
+    }
+}
+@media(max-width: 1050px){
+    .text-about-service div{
+        font-size: 16px;
+    }
+    .date{
+        width: 30%;
+    }
+    .button-for-send-service-and-date{
+        width: 100%;
+        margin-left: 2.5%;
+        margin-top: 20px;
+    }
+    .info-about-service, .button-for-select-schedules{
+            width: calc(100% - 60px);
+    }
+    .button-select-schedules div{
+        font-size: 20px;
+        margin-left: 10%;
+    }
+
+
+}
+
+@media (max-width: 900px) {
+    .form-for-add-schedule{
+        display: block;
+        width: 100%;
+    }
+    .date{
+            width: 17.5%;
+    }
+    fieldset{
+        width: 80%;
+        margin-left: 10%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex-direction: column;
+    }
+    .info-about-service, .button-for-select-schedules, .button-select-schedules, .all-schedules{
+                width: 80%;
+    }
+
+
+}
+@media(max-width: 700px){
+    .date {
+        width: 22%;
+    }
+}
+
+@media(max-width: 570px){
+    .date {
+        width: 30%;
+    }
+    fieldset{
+        width: 95%;
+        margin-left:2.5%;
+        padding:0;
+    }
+    .text-about-service div{
+        font-size: 16px;
+    }
+    .text-about-service .price{
+        font-size:16px;
+    }
+    .text-about-service{
+        margin-left:5px;
+    }
+    .change-service, .select-service{
+        width:30px;
+    }
+    .change-service img, .select-service img {
+        margin-left:10px;
+    }
+    .all-schedules{
+        width: calc(100% - 50px);
+    }
+    .date-appointment{
+        width:30%;
+    }
+    .time{
+        width: 22%;
+    }
+    .button-for-send-service-and-date{
+        opacity: 0.93;
+        width: 95%;
+        margin-left: 2.5%;
+        margin-top: 20px;
+    }
+    .info-about-client{
+        margin-top: 40px;
+
+        width: 90%;
+        margin-left: 5%;
+    }
+    .button-for-send-form {
+        margin-bottom: 40px;
+    }
+    .button-select-schedules p {
+        margin-left: -10px;
+         font-size: 19px;
+    }
+    .all-schedules{
+    margin-left: 0;}
+}
+@media (max-width: 420px){
+     .text-about-service div{
+        font-size: 14px;
+     }
+}
+@media(max-width: 350px){
+     .button-select-schedules p {
+
+            font-size: 18px;
+     }
+}
+

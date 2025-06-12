@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Добавление расписания</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/add-schedule.css">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="img-logo">
+            <a href="/">
+                <img src="/img/page/logotip3.png" alt="логотип">
+            </a>
+        </div>
+        <nav class="menu-header">
+            <ul>
+                <li>
+                    <a href="/admin/schedule">РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/schedule/new">ДОБАВИТЬ РАСПИСАНИЕ</a>
+                </li>
+                <li>
+                    <a href="/admin/services/new">ДОБАВИТЬ УСЛУГУ</a>
+                </li>
+                <li>
+                    <a href="/admin/reviews/change">ОТЗЫВЫ</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-burger">
+            <div class="before"></div>
+            <div class="center"></div>
+            <div class="after"></div>
+        </div>
+    </div>
+</header>
+<form class="form-for-add-schedule" action="/admin/schedule/new" method="post">
+    <fieldset class="services-fieldset">
+        <tr th:each="cur:${services}">
+        <input class="checkbox-service"   type="checkbox" th:name="ids"  th:value="${cur.getId()}">
+        <div class="info-about-service">
+            <div class="img-service-div">
+                <img th:src="'/'+${cur.getPathMainPhoto()}">
+            </div>
+            <div class="text-about-service">
+                <div th:text="${cur.getName()}" class="name"></div>
+                <div class="price" th:text="${cur.getPrice()+' Br'}"></div>
+            </div>
+            <div class="delete-service">
+                <img src="/img/page/cancel.png">
+            </div>
+            <div class="select-service">
+                <img src="/img/page/select.png">
+            </div>
+        </div>
+        </tr>
+    </fieldset>
+    <fieldset>
+        <div class="button-select-schedules">
+            <img src="/img/page/calendar.png">
+            <div class="text-in-button-select-schedules">
+                <p>Выбрать даты и время</p>
+            </div>
+        </div>
+        <div class="all-schedules">
+            <div class="schedule-in-day" >
+                <tr th:each="entry:${schedules!=null ? schedules.entrySet(): null}">
+                    <div class="date"><p th:text="${entry.getKey()}"></p></div>
+                    <div class="times" >
+                        <div class="time" th:each="entryValue:${entry.getValue()}">
+                            <input  type="checkbox" th:id="${entryValue}" th:value="${entryValue}" name="dates">
+                            <div class="time-block">
+                                <p th:text="${entryValue.toLocalTime()}">10:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </div>
+        </div>
+        <button class="button-for-send-service-and-date">Сохранить</button>
+    </fieldset>
+</form>
+<script src="/script/menu-header.js"></script>
+
+<script>
+
+
+    var checkOpenAllSchedules=false;
+    document.querySelector(".button-select-schedules").onclick=function (){
+        if(!checkOpenAllSchedules){
+            document.querySelector(".all-schedules").style.display="block"
+            checkOpenAllSchedules=true
+        }
+        else {
+            document.querySelector(".all-schedules").style.display="none"
+            checkOpenAllSchedules=false
+        }
+    }
+
+    let dates=document.querySelectorAll(".date")
+    var checkOpenDatesSchedules=new Array(dates.length);
+    console.log(checkOpenDatesSchedules)
+    for(let i=0;i<dates.length;i++){
+        dates[i].addEventListener("click",func.bind(null, i),this)
+
+    }
+    function func (i, event) {
+        block = event.currentTarget
+        console.log(checkOpenDatesSchedules[i])
+        if (!checkOpenDatesSchedules[i]) {
+            block.nextElementSibling.style.display = "flex"
+            block.style.backgroundColor = "rgba(40,40,40,0.7)"
+            block.style.color = "white"
+            block.style.fontWeight = "800"
+
+            checkOpenDatesSchedules[i] = true
+        } else {
+            block.nextElementSibling.style.display = "none"
+            block.style.backgroundColor = "white"
+            block.style.color = "black"
+            block.style.fontWeight = "400"
+
+            checkOpenDatesSchedules[i] = false
+        }
+    }
+    let checkedTimes=0
+    let timeBlocks=document.querySelectorAll(".time-block")
+    let selectServices=document.querySelectorAll(".info-about-service")
+    let checkedServices=0
+    for(let i=0;i<timeBlocks.length;i++){
+        timeBlocks[i].onclick=function (){
+            if(this.previousElementSibling.checked){
+                checkedTimes--;
+            }
+            else {
+                checkedTimes++;
+            }
+            this.previousElementSibling.checked=!this.previousElementSibling.checked
+
+            if(checkedTimes===0 || checkedServices===0){
+                document.querySelector(".button-for-send-service-and-date").style.display="none"
+            }
+            else {
+                document.querySelector(".button-for-send-service-and-date").style.display="block"
+
+            }
+        }
+    }
+
+
+    for(let i=0;i<selectServices.length;i++){
+        selectServices[i].onclick=function (){
+            inputService=this.previousElementSibling
+            if(inputService.checked){
+                console.log(inputService.checked)
+                this.querySelector(".select-service").style.display="block"
+                this.querySelector(".delete-service").style.display="none"
+                checkedServices--
+            }
+            else {
+                console.log(inputService.checked)
+                this.querySelector(".select-service").style.display="none"
+                this.querySelector(".delete-service").style.display="block"
+                checkedServices++
+            }
+            if(checkedTimes===0 || checkedServices===0){
+                document.querySelector(".button-for-send-service-and-date").style.display="none"
+            }
+            else {
+                document.querySelector(".button-for-send-service-and-date").style.display="block"
+
+            }
+            inputService.checked=!inputService.checked
+            console.log(checkedServices)
+        }
+    }
+
+</script>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Добавить расписание</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div>-->
+<!--    <p>Добавить расписание</p>-->
+<!--    <form action="/admin/schedule/new" method="post">-->
+<!--        <div th:each="cur:${services}">-->
+<!--            <input type="checkbox" th:name="ids"  th:value="${cur.getId()}"-->
+<!--               th:text="${cur.getName()}">-->
+<!--        </div>-->
+<!--        <div th:each="cur:${schedules}">-->
+<!--            <p>FFF</p>-->
+<!--            <p th:text="${cur.get(0).getDate().getDayOfMonth()}+' июля'"></p>-->
+<!--            <div th:each="cur1:${cur}">-->
+<!--                <label th:for="${cur1.getDate()}" th:text="${cur1.getDate().getHour()}"></label>-->
+<!--                <input type="checkbox" th:name="dates" th:id="${cur1.getDate()}" th:value="${cur1.getDate()}">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <input type="submit">-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

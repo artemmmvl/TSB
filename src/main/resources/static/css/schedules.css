@@ -1,0 +1,175 @@
+.all-schedules{
+    display: block;
+    width: 60%;
+    margin-left: 0;
+}
+body{
+    font-family: 'Manrope', Arial, sans-serif;
+    padding-top: 100px;
+    padding-bottom: 40px;
+    background: radial-gradient(circle at right top, #f3edef 70%,#ecd0e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.container-info-about-schedule{
+    display: none;
+    width: 100%;
+    margin-left: 3%;
+    margin-top: 30px;
+}
+.time-block{
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+.date-appointment{
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.05);
+
+}
+.container-info-about-schedule>.info-about-schedule{
+    width: 40%;
+    max-width: 45%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 18px;
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.05);
+
+
+}
+.name-service .value{
+    color: #212121;
+    opacity: 0.7;
+}
+
+.name-service span{
+    color: black;
+}
+.buttons button{
+    color: black;
+    font-size: 16px;
+    background-color: white;
+    width: 100%;
+    border-style: solid;
+    border-color: #000;
+    border-width: 1px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    /*border-radius: 10px;*/
+
+}
+.buttons button:hover{
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+
+.buttons{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex: 43% 55%;
+    justify-content: space-between;
+}
+.name-service{
+    margin-top: 20px;
+
+}
+.line{
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    height: 1px;
+    margin-bottom: 10px;
+    margin-top: 8px;
+    background-color: #ccc;
+
+}
+.container-all-schedules{
+    display: flex;
+    justify-content: center;
+}
+.header-text{
+    font-size: 24px;
+    text-align: center;
+    margin: 0;
+}
+.form-for-delete-schedule{
+    position: absolute;
+    right: -8px;
+    top: -6px;
+    /*background-color: rgba(238, 90, 75, 0.94);*/
+    background-color: #d6d6e5;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #8f8f8f;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+
+}
+
+.form-for-delete-schedule button{
+    border-style: none;
+    background-color: transparent;
+    font-size: 20px;
+    height: 100%;
+    width: 100%;
+
+}
+.form-for-delete-schedule form{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.form-for-delete-schedule button:before{
+    content: '';
+    width: 12px;
+    position: absolute;
+    top: 11.5px;
+    left: 6.5px;
+    height: 1.5px;
+    background-color: #141414;
+}
+.form-for-delete-schedule button:hover{
+    cursor: pointer;
+}
+.time:hover{
+    cursor: pointer;
+}
+.container::before{
+    background: radial-gradient(circle at left bottom, rgba(230,230,250,0.7) , rgba(255,250,250,0.7));
+}
+@media (max-width: 650px){
+    .menu-header {
+        width: 100%;
+    }
+    .date-appointment{
+        width: 30%;
+    }
+    .all-schedules {
+        width: 90%;
+    }
+    .form-for-delete-schedule{
+        width: 20px;
+        height: 20px;
+    }
+    .container-info-about-schedule>.info-about-schedule {
+        width: 85%;
+        max-width: 85%;
+    }
+    .form-for-delete-schedule button:before {
+        top: 9.5px;
+        left: 4.5px;
+    }
+
+}
+@media(max-width: 450px){
+    .time{
+        width: 22.5%;
+    }
+    .buttons button{
+        font-size: 14px;
+    }
+}
+@media(max-width: 360px){
+    .buttons button{
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Запись</title>
+    <link rel="stylesheet" href="/css/add-appointment.css">
+    <meta name="description" content="Меня зовут Таня и я из немногих, кто создает нешаблонные брови и обучает этому. Я за индивидуальный подход к каждым бровям, за гармонию на лице, красоту и естественность. Мой стиль в работе для тех, кто не хочет следовать шаблонам и стандартам красоты, а кто принимает свою индивидуальность">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/favicon/apple-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/favicon/apple-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/favicon/apple-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/favicon/apple-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/favicon/apple-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-icon-120x120.png}">
+    <link rel="icon" type="image/png" sizes="192x192"  th:href="@{/favicon/android-icon-192x192.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{/favicon/favicon-96x96.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+</head>
+<body>
+<div class="header-div">
+    <div class="name"><p>Запись</p></div>
+    <div class="close"><div><a href="/"></a> </div></div>
+</div>
+<div class="div-error">
+    <p th:utext="${error}" class="error"></p>
+</div>
+
+<form class="form-for-add-appointment" action="/appointments/new" method="post">
+
+    <fieldset class="about-services-fieldset">
+
+        <div class="info-about-service" th:each="cur:${services}">
+            <input class="radio-service"  type="radio" th:value="${cur.getId()}"
+                   th:checked="${serviceId==cur.getId()} ? true : 0" id="service" name="serviceId">
+            <div class="img-service-div">
+                <img th:src="'/'+${cur.getPathMainPhoto()}">
+            </div>
+            <div class="text-about-service">
+                <div th:text="${cur.getName()}" class="name"></div>
+                <div class="price" th:text="${cur.getPrice()+' Br'}"></div>
+            </div>
+            <div class="change-service">
+                <img src="/img/page/change.png">
+            </div>
+            <div class="select-service">
+                <a th:href="@{/appointments/new(service=${cur.getId()})}"><img src="/img/page/select.png"></a>
+            </div>
+
+        </div>
+        <div class="button-select-schedules">
+            <img src="/img/page/calendar.png">
+            <div class="text-in-button-select-schedules">
+                <p>Выбрать дату и время</p>
+            </div>
+        </div>
+        <div  th:style="${name} ? 'display:block;'" class="all-schedules">
+            <div class="schedule-in-day" >
+                <tr th:each="entry:${schedule!=null ? schedule.entrySet() : null}">
+                    <div class="date-appointment"><p th:text="${entry.getKey()}"></p></div>
+                    <div class="times-appointments" >
+                        <div class="time" th:each="entryValue:${entry.getValue()}">
+                            <input type="radio" th:id="${entryValue.getDate()}" required th:value="${entryValue.getId()}" name="schedule">
+                            <div class="time-block">
+                                <p th:text="${entryValue.getDate().toLocalTime()}">10:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </div>
+        </div>
+        <div class="button-for-send-service-and-date"><p><a>Выбрать</a></p></div>
+
+    </fieldset>
+    <fieldset class="info-about-client">
+        <div class="input-text">
+            <label for="name">Ваше имя и фамилия</label>
+            <input  required type="text" th:value="${name}" placeholder="Мария Иванова" name="name" id="name">
+        </div>
+        <div class="input-text">
+            <label for="inst">Ник в инстаграмме</label>
+            <input required type="text" th:value="${inst}" name="inst" placeholder="nik_example" id="inst">
+        </div>
+        <div class="input-text">
+            <label for="email">Ваш email</label>
+            <input type="email"   required name="email" th:value="${email}" placeholder="example@email.com"  id="email">
+        </div>
+        <div class="input-text">
+            <label for="phone">Ваш телефон</label>
+            <input type="tel" required name="phone" th:value="${phone}" placeholder="+375 (99) 999-99-99"  id="phone">
+        </div>
+        <div class="input-text">
+            <label for="comment">Комментарий</label>
+            <textarea name="comment" th:text="${comment}" placeholder="Сюда можете написать комментарий к записи" id="comment"></textarea>
+        </div>
+
+        <input type="hidden" name="serviceId" th:value="${serviceId}">
+
+        <div class="send-email">
+            <input type="checkbox" checked  id="send-email" name="send_email">
+            <div>Получить информацию о записи на почту</div>
+        </div>
+        <button class="button-for-send-form">Записаться</button>
+    </fieldset>
+</form>
+<script>
+
+    let blocks=document.querySelectorAll(".info-about-service")
+    if(blocks.length==0){
+        document.querySelector(".about-services-fieldset").innerHTML="<h1>Нет услуг:(</h1>"
+    }
+
+    let changeService=document.querySelectorAll(".change-service img")
+    for (var i = 0; i < blocks.length; i++) {
+        if (!blocks[i].querySelector('input').checked) {
+            blocks[i].style.display = "none";
+        } else {
+            blocks[i].style.borderStyle = "solid";
+            blocks[i].style.borderColor = "black";
+            blocks[i].style.borderWidth = "2px";
+        }
+        changeService[i].addEventListener("click", function () {
+            for (var i = 0; i < blocks.length; i++) {
+                blocks[i].style.display = "flex";
+                blocks[i].querySelector(".change-service").style.display = 'none';
+                blocks[i].querySelector(".select-service").style.display = 'block';
+            }
+        })
+    }
+
+    var checkOpenAllSchedules=false;
+    document.querySelector(".button-select-schedules").onclick=function (){
+        if(!checkOpenAllSchedules){
+            document.querySelector(".all-schedules").style.display="block"
+            checkOpenAllSchedules=true
+        }
+        else {
+            document.querySelector(".all-schedules").style.display="none"
+            checkOpenAllSchedules=false
+        }
+    }
+    let dates=document.querySelectorAll(".date-appointment")
+    if(dates.length==0){
+        document.querySelector(".button-select-schedules").innerHTML="<h3>Нет свободных окошек:(</h3>"
+        document.querySelector(".button-select-schedules").style.height="auto";
+
+    }
+    var checkOpenDatesSchedules=new Array(dates.length);
+    console.log(checkOpenDatesSchedules)
+    for(let i=0;i<dates.length;i++){
+        dates[i].addEventListener("click",func.bind(null, i),this)
+
+    }
+    function func (i, event) {
+        block = event.currentTarget
+        console.log(checkOpenDatesSchedules[i])
+        if (!checkOpenDatesSchedules[i]) {
+            block.nextElementSibling.style.display = "flex"
+            block.style.backgroundColor = "rgba(40,40,40,0.7)"
+            block.style.color = "white"
+            block.style.fontWeight = "800"
+
+            checkOpenDatesSchedules[i] = true
+        } else {
+            block.nextElementSibling.style.display = "none"
+            block.style.backgroundColor = "white"
+            block.style.color = "black"
+            block.style.fontWeight = "400"
+
+            checkOpenDatesSchedules[i] = false
+        }
+    }
+    let timeBlocks=document.querySelectorAll(".time-block")
+
+
+    for(let i=0;i<timeBlocks.length;i++){
+        timeBlocks[i].onclick=function (){
+            // alert(1)
+            this.previousElementSibling.checked=true
+            document.querySelector(".button-for-send-service-and-date").style.display="flex"
+
+        }
+
+    }
+    let months=["января","февраля","марта","апреля","мая",
+        "июня","июля","августа","сентября","окрября","ноября","декабря"]
+    document.querySelector(".button-for-send-service-and-date").onclick=function () {
+        radioButtons=document.querySelectorAll(".time input[type=radio]")
+        for(let i=0;i<radioButtons.length;i++){
+            if(radioButtons[i].checked){
+                console.log(radioButtons[i].id.toString().substring(8,10))
+                let s=Number(radioButtons[i].id.toString().substring(8,10))+" "+
+                    months[Number(radioButtons[i].id.toString().substring(5,7))-1]
+                +" | "+radioButtons[i].id.toString().substring(11,16)
+
+                // document.querySelector(".text-in-button-select-schedules p").style.marginTop="20px"
+                document.querySelector(".text-in-button-select-schedules p").innerHTML=s
+            }
+        }        this.style.display="none"
+        document.querySelector(".all-schedules").style.display="none"
+        document.querySelector(".info-about-client").style.display="block"
+        checkOpenAllSchedules=false
+    }
+    document.querySelector(".close").onclick=function(){
+        window.location.href=document.querySelector(".close a").href
+    }
+    if(document.querySelector(".div-error p").innerHTML==""){
+    document.querySelector(".div-error").style.display="none"
+    }
+    else{
+        setTimeout(()=>{document.querySelector(".div-error").style.display="none"}, 3000)
+    }
+</script>
+</body>
+</html>

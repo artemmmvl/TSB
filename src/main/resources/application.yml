@@ -1,0 +1,14 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: tatanasvatceva@gmail.com
+    password: fgpukbnynqlikczy
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          from: tatanasvatceva@gmail.com
